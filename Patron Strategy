@@ -1,0 +1,170 @@
+interface Strateg<T>{ public void comparation(Context c);}
+
+class Person
+{
+    private String name;
+    private int age;
+    private int dni;
+    
+    public Person(String _name, int _age, int _dni)
+    {
+        name = _name;
+        age = _age;
+        dni = _dni;
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+    public int getAge()
+    {
+        return age;
+    }
+    public int getDni()
+    {
+        return dni;
+    }
+    
+}
+
+class Context
+{
+    private Person[] People = {new Person("Juan", 21, 46318419),
+                        new Person("Ana",19, 43526578), 
+                        new Person("Luis",15, 82674023)};
+    
+    public Person[] getPeople()
+    {
+        return People;
+    }
+}
+
+class Strategy_name implements Strateg<Person>
+{
+    public void comparation(Context c){
+        Person [] nuevo = c.getPeople();
+        for(int i=1;i<nuevo.length;i++){
+            for(int j=0;j<nuevo.length-i;j++){
+                if((nuevo[j].getName().compareTo(nuevo[j+1].getName())>0))
+                {
+                    Person temp;
+                    temp = nuevo[j];
+                    nuevo[j] = nuevo[j+1];
+                    nuevo[j+1] = temp;
+                }
+            }
+            
+        }
+    }
+}
+
+class Strategy_name_inv implements Strateg<Person>
+{
+    public void comparation(Context c){
+        Person [] nuevo = c.getPeople();
+        for(int i=1;i<nuevo.length;i++){
+            for(int j=0;j<nuevo.length-i;j++){
+                if((nuevo[j].getName().compareTo(nuevo[j+1].getName())<0))
+                {
+                    Person temp;
+                    temp = nuevo[j];
+                    nuevo[j] = nuevo[j+1];
+                    nuevo[j+1] = temp;
+                }
+            }
+            
+        }
+    }
+}
+
+class Strategy_age implements Strateg<Person>
+{
+    public void comparation(Context c){
+        Person [] nuevo = c.getPeople();
+        for(int i=1;i<nuevo.length;i++){
+            for(int j=0;j<nuevo.length-i;j++){
+                if(nuevo[j].getAge()>nuevo[j+1].getAge())
+                {
+                    Person temp;
+                    temp = nuevo[j];
+                    nuevo[j] = nuevo[j+1];
+                    nuevo[j+1] = temp;
+                }
+            }
+            
+        }
+    }
+}
+
+class Strategy_age_inv implements Strateg<Person>
+{
+    public void comparation(Context c){
+        Person [] nuevo = c.getPeople();
+        for(int i=1;i<nuevo.length;i++){
+            for(int j=0;j<nuevo.length-i;j++){
+                if(nuevo[j].getAge()<nuevo[j+1].getAge())
+                {
+                    Person temp;
+                    temp = nuevo[j];
+                    nuevo[j] = nuevo[j+1];
+                    nuevo[j+1] = temp;
+                }
+            }
+            
+        }
+    }
+}
+
+class Strategy_dni implements Strateg<Person>
+{
+    public void comparation(Context c){
+        Person [] nuevo = c.getPeople();
+        for(int i=1;i<nuevo.length;i++){
+            for(int j=0;j<nuevo.length-i;j++){
+                if(nuevo[j].getDni()>nuevo[j+1].getDni())
+                {
+                    Person temp;
+                    temp = nuevo[j];
+                    nuevo[j] = nuevo[j+1];
+                    nuevo[j+1] = temp;
+                }
+            }
+            
+        }
+    }
+}
+
+class Strategy_dni_inv implements Strateg<Person>
+{
+    public void comparation(Context c){
+        Person [] nuevo = c.getPeople();
+        for(int i=1;i<nuevo.length;i++){
+            for(int j=0;j<nuevo.length-i;j++){
+                if(nuevo[j].getDni()<nuevo[j+1].getDni())
+                {
+                    Person temp;
+                    temp = nuevo[j];
+                    nuevo[j] = nuevo[j+1];
+                    nuevo[j+1] = temp;
+                }
+            }
+            
+        }
+    }
+}
+
+public class Strategy {
+
+    static Context contexto = new Context();
+    public static void main(String[] args) {
+        Strateg<Person> strategia = new Strategy_age_inv();
+        strategia.comparation(contexto);
+        Person[] nuevo = contexto.getPeople();
+        for(int i=0;i<nuevo.length;i++)
+            System.out.println(nuevo[i].getName() + " " + nuevo[i].getAge() + " " + nuevo[i].getDni());
+
+    }
+
+}
+
